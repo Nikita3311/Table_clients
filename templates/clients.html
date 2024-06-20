@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты</title>
+</head>
+<body>
+    <h2>Клиенты</h2>
+    <table border="1">
+        <tr>
+            <th>Номер счета</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>ИНН</th>
+            <th>ФИО ответственного</th>
+            <th>Статус</th>
+            <th>Изменить статус</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client[0] }}</td>
+            <td>{{ client[1] }}</td>
+            <td>{{ client[2] }}</td>
+            <td>{{ client[3] }}</td>
+            <td>{{ client[4] }}</td>
+            <td>{{ client[5] }}</td>
+            <td>{{ client[6] }}</td>
+            <td>{{ client[7] }}</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="client_id" value="{{ client[0] }}">
+                    <select name="status">
+                        <option value="Не в работе" {% if client[7] == 'Не в работе' %}selected{% endif %}>Не в работе</option>
+                        <option value="В работе" {% if client[7] == 'В работе' %}selected{% endif %}>В работе</option>
+                        <option value="Отказ" {% if client[7] == 'Отказ' %}selected{% endif %}>Отказ</option>
+                        <option value="Сделка закрыта" {% if client[7] == 'Сделка закрыта' %}selected{% endif %}>Сделка закрыта</option>
+                    </select>
+                    <button type="submit">Изменить статус</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
